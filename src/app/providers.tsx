@@ -1,13 +1,13 @@
-// In Next.js, this file would be called: app/providers.tsx
 'use client';
 
-// Since QueryClientProvider relies on useContext under the hood, we have to put 'use client' on top
 import {
   isServer,
   QueryClient,
   QueryClientProvider,
 } from '@tanstack/react-query';
 import { ThemeProvider } from 'next-themes';
+import { useEffect } from 'react';
+import { useAuthStore } from '@/stores/auth-store';
 
 function makeQueryClient() {
   return new QueryClient({
@@ -37,11 +37,14 @@ function getQueryClient() {
   }
 }
 
+function AuthHydration() {
+  useEffect(() => {
+    useAuthStore.persist.rehydrate();
+  }, []);
+  return null;
+}
+
 export default function Providers({ children }: { children: React.ReactNode }) {
-  // NOTE: Avoid useState when initializing the query client if you don't
-  //       have a suspense boundary between this and the code that may
-  //       suspend because React will throw away the client on the initial
-  //       render if it suspends and there is no boundary
   const queryClient = getQueryClient();
 
   return (
@@ -51,7 +54,10 @@ export default function Providers({ children }: { children: React.ReactNode }) {
       enableSystem
       disableTransitionOnChange
     >
-      <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
+      <QueryClientProvider client={queryClient}>
+        <AuthHydration />
+        {children}
+      </QueryClientProvider>
     </ThemeProvider>
   );
 }
