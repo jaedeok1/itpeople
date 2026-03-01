@@ -57,7 +57,7 @@ export default function HomePage() {
                 모임 둘러보기 <ArrowRight size={18} className="ml-2" />
               </Link>
             </Button>
-            <Button asChild variant="outline" size="lg" className="border-white/50 text-white hover:bg-white/10 px-8">
+            <Button asChild size="lg" className="bg-transparent border border-white/70 text-white hover:bg-white/15 px-8">
               <Link href="/login">시작하기</Link>
             </Button>
           </div>
@@ -116,8 +116,8 @@ export default function HomePage() {
         <div className="max-w-6xl mx-auto px-4 py-16 text-center">
           <h2 className="text-3xl font-bold mb-4">지금 바로 시작하세요</h2>
           <p className="text-blue-100 mb-8">카카오 계정으로 5초만에 가입하고 IT인들과 연결되세요</p>
-          <Button asChild size="lg" className="bg-[#FEE500] hover:bg-[#F0D800] text-[#191919] font-semibold px-10">
-            <Link href="/login">카카오로 시작하기</Link>
+          <Button asChild size="lg" className="bg-white text-blue-600 hover:bg-blue-50 font-semibold px-10">
+            <Link href="/login">시작하기</Link>
           </Button>
         </div>
       </section>
