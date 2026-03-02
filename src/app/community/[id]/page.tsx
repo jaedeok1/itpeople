@@ -46,6 +46,7 @@ export default function PostDetailPage() {
 
   const [hasIncrementedView, setHasIncrementedView] = useState(false);
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
+  const [likeAnimating, setLikeAnimating] = useState(false);
 
   useEffect(() => {
     initialize();
@@ -82,6 +83,8 @@ export default function PostDetailPage() {
   const handleLike = () => {
     if (!user) { router.push('/login'); return; }
     likePost(post.id, user.id);
+    setLikeAnimating(true);
+    setTimeout(() => setLikeAnimating(false), 400);
     if (!isLiked) toast({ description: '좋아요를 눌렀습니다 ❤️' });
   };
 
@@ -275,13 +278,16 @@ export default function PostDetailPage() {
         <div className="px-6 md:px-8 pb-6 border-t border-gray-100 dark:border-gray-700 pt-5 flex items-center gap-4">
           <button
             onClick={handleLike}
-            className={`flex items-center gap-2 px-5 py-2 rounded-full border-2 font-medium text-sm transition-all ${
+            className={`flex items-center gap-2 px-5 py-2 rounded-full border-2 font-medium text-sm transition-all active:scale-95 ${
               isLiked
                 ? 'bg-red-50 border-red-200 text-red-500 dark:bg-red-900/20 dark:border-red-800'
-                : 'border-gray-200 dark:border-gray-600 text-gray-500 hover:border-red-200 hover:text-red-400 hover:bg-red-50/50'
+                : 'border-gray-200 dark:border-gray-600 text-gray-500 hover:border-red-200 hover:text-red-400 hover:bg-red-50/50 dark:hover:bg-red-900/10'
             }`}
           >
-            <Heart size={16} className={isLiked ? 'fill-red-500' : ''} />
+            <Heart
+              size={16}
+              className={`transition-all ${isLiked ? 'fill-red-500 text-red-500' : ''} ${likeAnimating ? 'animate-heart-beat' : ''}`}
+            />
             <span>{post.likes.length}</span>
           </button>
           <span className="text-sm text-gray-400">이 글이 도움이 됐나요?</span>

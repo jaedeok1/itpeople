@@ -146,7 +146,7 @@ export default function CommunityPage() {
               onClick={() => setSort('latest')}
               className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${
                 sort === 'latest'
-                  ? 'bg-gray-900 text-white dark:bg-white dark:text-gray-900'
+                  ? 'bg-gray-900 dark:bg-gray-100 text-white dark:text-gray-900 shadow-sm'
                   : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
               }`}
             >
@@ -156,7 +156,7 @@ export default function CommunityPage() {
               onClick={() => setSort('popular')}
               className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${
                 sort === 'popular'
-                  ? 'bg-gray-900 text-white dark:bg-white dark:text-gray-900'
+                  ? 'bg-gray-900 dark:bg-gray-100 text-white dark:text-gray-900 shadow-sm'
                   : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
               }`}
             >
